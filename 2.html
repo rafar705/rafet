@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الدفع</title>
+    <link rel="stylesheet" href="4.css">
+</head>
+
+<body background="r11.jpg">
+    <div class="checkout-container">
+        <h1 class="checkout-title">إتمام الدفع</h1>
+        <form id="payment-form" class="checkout-form">
+            <div class="form-group">
+                <label for="name">الاسم:</label>
+                <input type="text" id="name" required placeholder="أدخل اسمك">
+            </div>
+            <div class="form-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="text" id="phone" required placeholder="أدخل رقم الهاتف">
+            </div>
+            <div class="form-group">
+                <label for="invoice-date">تاريخ الفاتورة:</label>
+                <input type="date" id="invoice-date" required>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">طريقة الدفع:</label>
+                <select id="payment-method" required>
+                    <option value="cash">نقد</option>
+                    <option value="card">بطاقة تأمين</option>
+                </select>
+            </div>
+            <div id="card-section" class="form-group" style="display: none;">
+                <label for="card-number">رقم البطاقة:</label>
+                <input type="text" id="card-number" placeholder="أدخل رقم البطاقة">
+            </div>
+            <button type="submit" class="checkout-button">تأكيد الدفع</button>
+        </form>
+        <p id="confirmation-message" class="confirmation-message" style="display: none;">لقد تمت عملية الدفع بنجاح!</p>
+    </div>
+
+    <script>
+        const paymentMethod = document.getElementById("payment-method");
+        const cardSection = document.getElementById("card-section");
+        const form = document.getElementById("payment-form");
+        const confirmationMessage = document.getElementById("confirmation-message");
+
+        paymentMethod.addEventListener("change", () => {
+            cardSection.style.display = paymentMethod.value === "card" ? "block" : "none";
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            confirmationMessage.style.display = "block"; // عرض رسالة التأكيد
+
+            // بعد 3 ثواني، الرجوع إلى الصفحة 1.html
+            setTimeout(() => {
+                window.location.href = "1.html"; // إعادة التوجيه إلى الصفحة 1.html
+            }, 3000); // تأخير 3 ثواني قبل إعادة التوجيه
+        });
+    </script>
+</body>
+</html>
